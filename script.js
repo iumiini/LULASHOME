@@ -1,7 +1,6 @@
 // ===== Supabase 配置 =====
-// 請替換為你自己的 Supabase URL 和 Key
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://dgdcmqmpnfmoablwxbgs.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_5UvBU9_j0CuvOjqz1Vmk0A_2lKBPG6h';
 
 // ===== VIP 特殊名字列表 =====
 const VIP_NAMES = [
