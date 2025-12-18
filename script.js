@@ -197,7 +197,7 @@ async function handleSubmit() {
     const result = generateResponse(name, dream);
 
     // 顯示彈出視窗
-    showModal(result);
+    showModal(result, name);
 }
 
 // ===== 生成回應 =====
@@ -216,9 +216,9 @@ function generateResponse(name, dream) {
     // 檢查是否為 VIP 名字
     if (VIP_NAMES.includes(nameLower)) {
         response.isVIP = true;
-        response.opening = `尊貴的 LULU 家族成員，宇宙對你有特別的安排！`;
-        response.transition = `你的名字閃耀著金色的光芒，這是命運的指引...`;
-        response.conclusion = `宇宙選擇了你，成為最自由、最閃耀的...`;
+        response.opening = `尊貴的 ${name}，LULU 家族成員，宇宙對你有特別的安排！`;
+        response.transition = `${name}，你的名字閃耀著金色的光芒，這是命運的指引...`;
+        response.conclusion = `宇宙選擇了你，${name}，成為最自由、最閃耀的...`;
         return response;
     }
 
@@ -226,9 +226,9 @@ function generateResponse(name, dream) {
     const isAlreadyDelivery = DELIVERY_KEYWORDS.some(keyword => dreamLower.includes(keyword.toLowerCase()));
     if (isAlreadyDelivery) {
         response.isAlreadyDelivery = true;
-        response.opening = `恭喜你！你已經找到了宇宙的終極職業！`;
-        response.transition = `你的靈魂早已與外送員的使命連結，這是最完美的安排！`;
-        response.conclusion = `繼續在這條光榮的道路上前進，你就是外送界的傳奇！`;
+        response.opening = `${name}，恭喜你！你已經找到了宇宙的終極職業！`;
+        response.transition = `${name}，你的靈魂早已與外送員的使命連結，這是最完美的安排！`;
+        response.conclusion = `繼續在這條光榮的道路上前進，${name}，你就是外送界的傳奇！`;
         return response;
     }
 
@@ -236,7 +236,7 @@ function generateResponse(name, dream) {
     for (const [category, data] of Object.entries(CAREER_RESPONSES)) {
         const matched = data.keywords.some(keyword => dreamLower.includes(keyword));
         if (matched) {
-            response.opening = data.opening;
+            response.opening = `${name}，${data.opening}`;
             response.transition = data.transition;
             response.conclusion = data.conclusion;
             return response;
@@ -244,14 +244,14 @@ function generateResponse(name, dream) {
     }
 
     // 使用預設回應
-    response.opening = DEFAULT_RESPONSE.opening;
+    response.opening = `${name}，${DEFAULT_RESPONSE.opening}`;
     response.transition = DEFAULT_RESPONSE.transition;
     response.conclusion = DEFAULT_RESPONSE.conclusion;
     return response;
 }
 
 // ===== 顯示彈出視窗 =====
-function showModal(result) {
+function showModal(result, name) {
     const modal = document.getElementById('modal');
     const modalContent = modal.querySelector('.modal-content');
     const modalResult = document.getElementById('modalResult');
@@ -334,6 +334,31 @@ async function typeWriter(result, container) {
     // 滾動到答案位置
     await sleep(300);
     answerText.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // 添加社群連結
+    await sleep(500);
+    const socialLinks = document.createElement('div');
+    socialLinks.className = 'modal-social-links';
+    socialLinks.innerHTML = `
+        <p style="text-align: center; margin: 20px 0 15px; color: rgba(255, 255, 255, 0.8); font-size: 0.95rem;">
+            喜歡這個網站嗎？歡迎支持我們！
+        </p>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.youtube.com/@LuluCatHome" target="_blank" class="social-btn youtube-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                YouTube
+            </a>
+            <a href="https://ko-fi.com/newandnow" target="_blank" class="social-btn kofi-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/>
+                </svg>
+                Ko-fi 支持
+            </a>
+        </div>
+    `;
+    container.appendChild(socialLinks);
 }
 
 // ===== 逐字顯示文字 =====
