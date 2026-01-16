@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ 神秘求職網站 ✨</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 星空背景 -->
+    <div class="stars"></div>
+    <div class="stars"></div>
+    <div class="stars"></div>
+
+    <div class="container">
+        <!-- 主標題 -->
+        <h1 class="title">✨ 神秘求職諮詢 ✨</h1>
+        <p class="subtitle">讓宇宙為你指引職業方向</p>
+
+        <!-- 訪客計數器 -->
+        <div class="visitor-counter">
+            <p>已有 <span id="visitorCount">0</span> 人尋求宇宙的指引</p>
+        </div>
+
+        <!-- 表單 -->
+        <div class="form-container">
+            <div class="input-group">
+                <label for="name">你的名字</label>
+                <input type="text" id="name" placeholder="請輸入你的名字..." required>
+            </div>
+
+            <div class="input-group">
+                <label for="dream">你夢想的職業</label>
+                <textarea id="dream" rows="4" placeholder="告訴宇宙你的職業夢想..." required></textarea>
+            </div>
+
+            <button id="submitBtn" class="submit-btn">🔮 尋求指引</button>
+
+            <!-- 勵志文字 -->
+            <p class="motivational-text">只要心裡相信就會成就</p>
+        </div>
+    </div>
+
+    <!-- 彈出視窗 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalResult"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
